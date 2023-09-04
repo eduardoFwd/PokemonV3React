@@ -1,0 +1,37 @@
+body{
+    font-size: 1.5rem;
+}
+.home-container {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+.home-card{
+  margin: 15px;
+  width: 300px;
+  height: 300px;
+  border-radius: 15px;
+  transition: all .3s ease;
+  position: relative;
+}
+.home-card img{
+  height: 100%;
+  width: 100%;
+}
+.home-card-text{
+  display: flex;
+  flex-wrap: wrap;
+  word-wrap: break-word;
+  width: 100%;
+  height: auto;
+  opacity: .5;
+  color: white;
+}
+.home-card:hover{
+opacity: 1;
+transform: translate(0px, -5px);
+}
+
+

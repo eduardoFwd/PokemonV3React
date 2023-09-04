@@ -1,0 +1,33 @@
+.imgContainer{
+    background-color: red;
+    width: 100%;
+    height: auto;
+    background-image: url("../assets/images/fondo.jpg");
+    background-size: cover; /* Ajustar la imagen para cubrir todo el contenedor */
+    background-repeat: no-repeat; /* Evitar la repetición de la imagen de fondo */
+    background-position: center; /* Centrar la imagen en el contenedor */
+}
+
+.bubbles-container{
+    width: 90%;
+    height: 50%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+.bubbles-pokemons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+    margin: 15px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url("../assets/images/pokebola.png");
+}
+.bubbles-pokemons > img{
+    width: 150px;
+    height: 150px;
+}
