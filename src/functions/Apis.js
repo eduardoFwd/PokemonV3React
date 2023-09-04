@@ -4,13 +4,12 @@ export async function getPokemon(id){
     const data = await response.json();
     if (response.ok) {
       return {
-        id: `${data.id}`,
+        id: data.id,
         name: data.name,
-        img: data.sprites.front_default,
+        img: data.sprites.other["official-artwork"].front_default,
         ability: data.abilities[0].ability.name,
-        type: data.types[0].type.name,
-        hp: [data.stats[0].base_stat, data.stats[0].stat.name],
-        attack: [data.stats[1].base_stat, data.stats[1].stat.name],
+        types: data.types.map((item) => item.type.name),
+        stats: data.stats.map((stat) => ({ [stat.stat.name]: stat.base_stat }))
       };
     } else {
       throw "Ha ocurrido un error al obtener el Pokémon.";
@@ -84,34 +83,18 @@ export async function getPokemonData(page,pokemonsLimit) {
       const data2 = await response2.json();
       return data2;
     });
-    // Espera a que todas las promesas se resuelvan
+    //esperar
     const pokemonData = await Promise.all(pokemonPromises);
     return pokemonData.map((data) => {
       return {
         id: `${data.id}`,
         name: data.name,
-        img: data.sprites.front_default,
-        ability: data.abilities[0].ability.name,
+        img: data.sprites.other["official-artwork"].front_default,
         types: data.types.map((item) => item.type.name),
-        hp: [data.stats[0].base_stat, data.stats[0].stat.name],
-        attack: [data.stats[1].base_stat, data.stats[1].stat.name],
       };
     });
   } catch (error) {
     console.error("Error:", error);
     throw error;
   }
-}
-export function getStatsPokemon() {
-  return pokemonData.map((data) => {
-    return {
-      id: `${data.id}`,
-      name: data.name,
-      img: data.sprites.front_default,
-      ability: data.abilities[0].ability.name,
-      types: data.types[0].type.name,
-      hp: [data.stats[0].base_stat, data.stats[0].stat.name],
-      attack: [data.stats[1].base_stat, data.stats[1].stat.name],
-    };
-  });
 }

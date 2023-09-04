@@ -2,16 +2,12 @@ import React, { useEffect, useState } from "react";
 import AppRouter from "./AppRouter";
 import Header from "./components/Header";
 import { getPokemon, getPokemonData } from "./functions/Apis";
-import { useNavigate } from "react-router-dom";
-
 const App = () => {
   const [pokemons, setPokemons] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [update, setupdate] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
   const pokemonsLimit = 30;
-  const navigate = useNavigate();
-
   useEffect(() => {
     const fetchData = async () => {
       try {
