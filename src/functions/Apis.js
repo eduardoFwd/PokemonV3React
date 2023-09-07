@@ -20,27 +20,41 @@ export async function getPokemon(id){
 };
 
 
-export async function insertPokemonData(data) {
-  try {
-    return fetch(
-      "https://64ee6475219b3e2873c32f49.mockapi.io/api/v1/pokemons",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      }
-    ).then((res) => {
-      if (res.ok) {
-        console.log(`Datos guardados en mockupApi:${JSON.stringify(data)}`);
-      } else {
-        throw `Error${data.name}.`;
-      }
-    });
-  } catch (err) {
-    throw "Ha ocurrido un error al insertar datos en la API: " + err;
-  }
+export async function AddPokemon(id) {
+
+    const res=await fetch("https://64f8b4b9824680fd217ff696.mockapi.io/api/pokemons/data/")
+    const data=await res.json()
+    const verify=data.find(({idPokemon})=>{
+      return idPokemon===id
+    })
+    //existe
+    if (verify!==undefined) {
+      return true;
+    }
+    else{
+      return fetch(
+        "https://64f8b4b9824680fd217ff696.mockapi.io/api/pokemons/data",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({idPokemon:id,state:true}),
+        }
+      ).then((res) => {
+        if (res.ok) {
+          console.log(`Datos guardados en mockupApi`);
+        } else {
+          throw `Error`;
+        }
+      });
+
+    }
+  } 
+export async function getPokemonFavorites() {
+  const res=await fetch("https://64f8b4b9824680fd217ff696.mockapi.io/api/pokemons/data/")
+  const data=await res.json()
+  return data
 }
 //
 export const deletePokemon = async (idPokemon) => {

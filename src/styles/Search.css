@@ -1,0 +1,13 @@
+.search{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    background-color: red;
+    height: 50px;
+    width: auto;
+}
+.imgsearch{
+    width: 20px;
+    height: 20px;
+    text-align: center;
+}
