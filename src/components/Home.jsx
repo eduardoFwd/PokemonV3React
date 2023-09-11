@@ -5,10 +5,10 @@ function Home() {
   return (
     <div className="home-container">
         {
-          Object.keys(homeInfo).map((key) => {
+          Object.keys(homeInfo).map((key,index) => {
             const value = homeInfo[key];
             return (
-              <article style={{ backgroundColor:value[1] }} className="home-card">
+              <article key={index} style={{ backgroundColor:value[1] }} className="home-card">
               <div>
                 <img src={value[2]}/>
                 <div className="home-card-text">

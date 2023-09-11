@@ -23,6 +23,7 @@ const App = () => {
         //
         const pokemonData = await getPokemonData(currentPage, pokemonsLimit);
         setPokemons(pokemonData);
+        setPokemonsCopy(pokemonData);
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching Pokémon data:", error);
@@ -41,7 +42,6 @@ const App = () => {
   }
   async function likePokemon(pokemon) {
     const verify = await AddPokemon(pokemon.id);
-    console.log("verify", verify);
     //verify
     if (verify === true) {
       console.log("ya existe");
@@ -57,8 +57,7 @@ const App = () => {
     let regex = new RegExp(e.target.value, "i"); //  'i'  insensible a mayusculas/minusculas
     if (e.target.value !== "") {
       console.log(pokemons);
-      const filterData = pokemons.filter(({ name }) => regex.test(name));
-      console.log(filterData);
+      const filterData = pokemonsCopy.filter(({ name }) => regex.test(name));
       setPokemons(filterData);
     } else {
       setUpdate(!update);
@@ -75,7 +74,7 @@ const App = () => {
           <AppRouter
             pokemons={pokemons}
             updatePage={updatePage}
-            pokemonsLi mit={pokemonsLimit}
+            pokemonsLimit={pokemonsLimit}
             redirect={redirect}
             likePokemon={likePokemon}
             favorites={favorites}

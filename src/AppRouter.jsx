@@ -27,7 +27,7 @@ function AppRouter({ pokemons, updatePage, pokemonsLimit,redirect,likePokemon,fa
             />
           }
         />
-        <Route path="/pokedex/:id" element={<PokemonInfo/>}/>
+        <Route path="/pokedex/:id" element={<PokemonInfo redirect={redirect}/>}/>
       </Routes>
     </div>
   );
