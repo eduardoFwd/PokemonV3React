@@ -7,11 +7,11 @@ function CardPokemon({ pokemons, redirect, likePokemon, favorites,deleteFavorite
       {pokemons.map((item, index) => (
         <article className="card" key={index}>
           {favorites.some(
-            (favorite) => favorite.idPokemon === item.id && favorite.state
+            (favorite) => favorite.idPokemon === item.id
           ) ? (
             <div className="buttons">
               <p className="like">❤️</p>
-              <button onClick={deleteFavorite} className="delete">Delete</button>
+              <button onClick={()=>deleteFavorite(item.id)} className="delete">Delete</button>
             </div>
           ) : (
             <button className="btnAdd" onClick={() => likePokemon(item)}>

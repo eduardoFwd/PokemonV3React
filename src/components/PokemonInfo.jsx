@@ -14,7 +14,8 @@ function PokemonInfo({ redirect }) {
     async function fetchData() {
       try {
         const pokemonData = await getPokemon(id);
-        const pokemonEvolutions = await fetchEvolutionChain(id);
+        const pokemonEvolutions = await fetchEvolutionChain(id); 
+        console.log(pokemonEvolutions);
         const promises = pokemonEvolutions.evolutions.map((i) => getPokemon(i));
         const evolutionsData = await Promise.all(promises);
         setDataEvolutions(evolutionsData);

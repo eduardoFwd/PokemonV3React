@@ -20,15 +20,13 @@ export async function getPokemon(id) {
 }
 
 export async function AddPokemon(id) {
-  const res = await fetch(
-    "https://64f8b4b9824680fd217ff696.mockapi.io/api/pokemons/data/"
-  );
-  const data = await res.json();
-  const verify = data.find(({ idPokemon }) => {
+  const pokemonMockApi = await getPokemonMockApi()
+  const verify = pokemonMockApi.some(({ idPokemon }) => {
     return idPokemon === id;
   });
+  console.log(verify);
   //existe
-  if (verify !== undefined) {
+  if (verify !== false) {
     return true;
   } else {
     return fetch(
@@ -49,7 +47,7 @@ export async function AddPokemon(id) {
     });
   }
 }
-export async function getPokemonFavorites() {
+export async function getPokemonMockApi() {
   const res = await fetch(
     "https://64f8b4b9824680fd217ff696.mockapi.io/api/pokemons/data/"
   );
@@ -57,29 +55,39 @@ export async function getPokemonFavorites() {
   return data;
 }
 //
-export const deletePokemon = async (idPokemon) => {
+export async function deletePokemon (idPokemon){
   try {
-    const response = await fetch(
-      `https://64ee6475219b3e2873c32f49.mockapi.io/api/v1/pokemons/${idPokemon}`,
-      {
-        method: "DELETE",
-      }
-    );
-
-    if (response.ok) {
-      console.log(`Pokémon ${idPokemon} eliminado correctamente.`);
+    const pokemonMockApi = await getPokemonMockApi()
+    const verify = pokemonMockApi.some(({ idPokemon }) => {
+      return idPokemon === id;
+    });
+    if (verify !== false) {
+      return true;
     } else {
-      console.error(`Error al eliminar el Pokémon con idPokemon ${idPokemon}.`);
+      return fetch(
+        `https://64ee6475219b3e2873c32f49.mockapi.io/api/v1/pokemons/${idPokemon}`,
+        {
+          method: "DELETE",
+        }
+      ).then((data)=>{
+        if (response.ok) {
+          console.log(`Pokémon ${idPokemon} eliminado correctamente.`);
+        } else {
+          console.error(`Error al eliminar el Pokémon con idPokemon ${idPokemon}.`);
+        }
+      });
+  
     }
   } catch (error) {
     console.error("Ha ocurrido un error:", error);
   }
 };
-export async function getPokemonData(page, pokemonsLimit) {
+export async function getPokemonData({currentPage=0, pokemonsLimit=1000 ,offSet=20}) {
+  console.log(currentPage,"=>",pokemonsLimit);
   try {
     const response1 = await fetch(
       `https://pokeapi.co/api/v2/pokemon?limit=${pokemonsLimit}&offset=${
-        page * pokemonsLimit
+        currentPage * offSet
       }`
     );
 

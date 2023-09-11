@@ -3,8 +3,9 @@ import AppRouter from "./AppRouter";
 import Header from "./components/Header";
 import {
   AddPokemon,
-  getPokemonFavorites,
+  getPokemonMockApi,
   getPokemonData,
+  deletePokemon,
 } from "./functions/Apis";
 const App = () => {
   const [pokemons, setPokemons] = useState([]);
@@ -18,12 +19,14 @@ const App = () => {
     const fetchData = async () => {
       try {
         //get favorites
-        const favoritePokemons = await getPokemonFavorites();
+        const favoritePokemons = await getPokemonMockApi();
         setFavorites(favoritePokemons);
         //
-        const pokemonData = await getPokemonData(currentPage, pokemonsLimit);
+        const pokemonData = await getPokemonData({currentPage:currentPage, pokemonsLimit:pokemonsLimit});
+        console.log(pokemonData);
+        const pokemonData2 = await getPokemonData({pokemonsLimit:1000});
         setPokemons(pokemonData);
-        setPokemonsCopy(pokemonData);
+        setPokemonsCopy(pokemonData2);
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching Pokémon data:", error);
@@ -51,7 +54,9 @@ const App = () => {
     }
   }
   function deleteFavorite(e) {
+    //deletePokemon()
     console.log(e.target);
+    
   }
   function searchText(e) {
     let regex = new RegExp(e.target.value, "i"); //  'i'  insensible a mayusculas/minusculas

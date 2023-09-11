@@ -3,7 +3,7 @@ import "../styles/Evolutions.css";
 import { selectType } from "../assets/imports/imports";
 function Evolutions({ dataEvolutions,redirect }) {
   return (
-    <div>
+    <div className="evolution-bg">
       <h1>Evolutions</h1>
       <div className="evolutions-container">
         {dataEvolutions.map((item, index) => (
