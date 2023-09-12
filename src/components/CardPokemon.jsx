@@ -1,17 +1,26 @@
 import React from "react";
 import { selectType } from "../assets/imports/imports";
 
-function CardPokemon({ pokemons, redirect, likePokemon, favorites,deleteFavorite}) {
+function CardPokemon({
+  pokemons,
+  redirect,
+  likePokemon,
+  favorites,
+  deleteFavorite,
+}) {
   return (
     <>
       {pokemons.map((item, index) => (
         <article className="card" key={index}>
-          {favorites.some(
-            (favorite) => favorite.idPokemon === item.id
-          ) ? (
+          {favorites.some((favorite) => favorite.idPokemon === item.id) ? (
             <div className="buttons">
               <p className="like">❤️</p>
-              <button onClick={()=>deleteFavorite(item.id)} className="delete">Delete</button>
+              <button
+                onClick={() => deleteFavorite(item.id)}
+                className="delete"
+              >
+                Delete
+              </button>
             </div>
           ) : (
             <button className="btnAdd" onClick={() => likePokemon(item)}>

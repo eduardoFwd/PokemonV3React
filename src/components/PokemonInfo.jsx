@@ -58,7 +58,7 @@ function PokemonInfo({ redirect }) {
                 ))}
               </div>
               <div className="types">
-                  <h1>Types</h1>
+                  <h2>Types</h2>
                   {data.types.map((type, indextype) => (
                     <div className={selectType(type)[1]} key={indextype}>
                       {type}

@@ -22,9 +22,11 @@ const App = () => {
         const favoritePokemons = await getPokemonMockApi();
         setFavorites(favoritePokemons);
         //
-        const pokemonData = await getPokemonData({currentPage:currentPage, pokemonsLimit:pokemonsLimit});
-        console.log(pokemonData);
-        const pokemonData2 = await getPokemonData({pokemonsLimit:1000});
+        const pokemonData = await getPokemonData({
+          currentPage: currentPage,
+          pokemonsLimit: pokemonsLimit,
+        });
+        const pokemonData2 = await getPokemonData({ pokemonsLimit: 1000 });
         setPokemons(pokemonData);
         setPokemonsCopy(pokemonData2);
         setIsLoading(false);
@@ -53,10 +55,16 @@ const App = () => {
       console.log("agregado");
     }
   }
-  function deleteFavorite(e) {
-    //deletePokemon()
-    console.log(e.target);
-    
+  async function deleteFavorite(id) {
+    const verify = await deletePokemon(id);
+    console.log(verify);
+    //verify
+    if (verify === true) {
+      console.log("ya existe");
+    } else {
+      setUpdate(!update);
+      console.log("agregado");
+    }
   }
   function searchText(e) {
     let regex = new RegExp(e.target.value, "i"); //  'i'  insensible a mayusculas/minusculas

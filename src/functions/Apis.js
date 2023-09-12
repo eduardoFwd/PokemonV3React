@@ -55,21 +55,25 @@ export async function getPokemonMockApi() {
   return data;
 }
 //
-export async function deletePokemon (idPokemon){
+export async function deletePokemon (id){
   try {
     const pokemonMockApi = await getPokemonMockApi()
-    const verify = pokemonMockApi.some(({ idPokemon }) => {
-      return idPokemon === id;
+    const pokemon = pokemonMockApi.find((pokemon) => {
+      console.log("idFind=>",pokemon.idPokemon,"type=>",typeof(pokemon.idPokemon));
+      console.log("id=>",id,"type=>",typeof(id));
+      return pokemon.idPokemon == id;
     });
-    if (verify !== false) {
+    console.log(pokemon);
+    if (pokemon === undefined) {
       return true;
     } else {
+      const idPokemon=pokemon.id
       return fetch(
-        `https://64ee6475219b3e2873c32f49.mockapi.io/api/v1/pokemons/${idPokemon}`,
+        `https://64f8b4b9824680fd217ff696.mockapi.io/api/pokemons/data/${idPokemon}`,
         {
           method: "DELETE",
         }
-      ).then((data)=>{
+      ).then((response)=>{
         if (response.ok) {
           console.log(`Pokémon ${idPokemon} eliminado correctamente.`);
         } else {
@@ -83,7 +87,6 @@ export async function deletePokemon (idPokemon){
   }
 };
 export async function getPokemonData({currentPage=0, pokemonsLimit=1000 ,offSet=20}) {
-  console.log(currentPage,"=>",pokemonsLimit);
   try {
     const response1 = await fetch(
       `https://pokeapi.co/api/v2/pokemon?limit=${pokemonsLimit}&offset=${
